@@ -195,7 +195,7 @@ production network-latency benchmark.
 -   Task 2's independent branches execute sequentially in this
     implementation; parallel task execution is not demonstrated.
 
-## Engineering reflection (\~300 words)
+## Engineering reflection 
 
 This assessment demonstrated how a multi-step workflow can be structured
 around explicit task dependencies, controlled state transitions, and
