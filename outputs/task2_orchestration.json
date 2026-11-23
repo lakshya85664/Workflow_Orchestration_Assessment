@@ -1,0 +1,355 @@
+{
+  "topic": "Topic 19 - Workflow Orchestration Assessment",
+  "task": "Task 2 - Workflow Orchestration Implementation",
+  "workflow_result": {
+    "run_id": "12566ebd-60a6-4f3f-b433-69c6cb725ce8",
+    "business_key": "ORDER-2001",
+    "status": "completed",
+    "next_action": "none",
+    "steps_executed": 6,
+    "task_count": 6,
+    "completed_tasks": 6,
+    "tasks": {
+      "validate_order": {
+        "name": "Validate order",
+        "owner": "validation_service",
+        "state": "completed",
+        "dependencies": [],
+        "attempts": 1,
+        "result": {
+          "valid": true,
+          "order_id": "ORDER-2001"
+        }
+      },
+      "check_inventory": {
+        "name": "Check inventory",
+        "owner": "inventory_service",
+        "state": "completed",
+        "dependencies": [
+          "validate_order"
+        ],
+        "attempts": 1,
+        "result": {
+          "available": true,
+          "quantity_available": 10
+        }
+      },
+      "reserve_inventory": {
+        "name": "Reserve inventory",
+        "owner": "inventory_service",
+        "state": "completed",
+        "dependencies": [
+          "check_inventory"
+        ],
+        "attempts": 1,
+        "result": {
+          "reserved": true,
+          "reservation_id": "RES-2001"
+        }
+      },
+      "process_payment": {
+        "name": "Process payment",
+        "owner": "payment_service",
+        "state": "completed",
+        "dependencies": [
+          "validate_order"
+        ],
+        "attempts": 1,
+        "result": {
+          "payment_status": "approved",
+          "payment_id": "PAY-2001"
+        }
+      },
+      "create_shipment": {
+        "name": "Create shipment",
+        "owner": "fulfilment_service",
+        "state": "completed",
+        "dependencies": [
+          "reserve_inventory",
+          "process_payment"
+        ],
+        "attempts": 1,
+        "result": {
+          "shipment_status": "created",
+          "shipment_id": "SHIP-2001"
+        }
+      },
+      "notify_customer": {
+        "name": "Notify customer",
+        "owner": "notification_service",
+        "state": "completed",
+        "dependencies": [
+          "create_shipment"
+        ],
+        "attempts": 1,
+        "result": {
+          "notification_status": "sent",
+          "notification_id": "NOTIFY-2001"
+        }
+      }
+    },
+    "events": [
+      {
+        "event": "task_registered",
+        "state": "created",
+        "details": {
+          "task_id": "validate_order",
+          "task_name": "Validate order",
+          "owner": "validation_service"
+        },
+        "timestamp": "2026-11-23T12:12:11.431578+00:00"
+      },
+      {
+        "event": "task_registered",
+        "state": "created",
+        "details": {
+          "task_id": "check_inventory",
+          "task_name": "Check inventory",
+          "owner": "inventory_service"
+        },
+        "timestamp": "2026-11-23T12:12:11.431601+00:00"
+      },
+      {
+        "event": "task_registered",
+        "state": "created",
+        "details": {
+          "task_id": "reserve_inventory",
+          "task_name": "Reserve inventory",
+          "owner": "inventory_service"
+        },
+        "timestamp": "2026-11-23T12:12:11.431608+00:00"
+      },
+      {
+        "event": "task_registered",
+        "state": "created",
+        "details": {
+          "task_id": "process_payment",
+          "task_name": "Process payment",
+          "owner": "payment_service"
+        },
+        "timestamp": "2026-11-23T12:12:11.431612+00:00"
+      },
+      {
+        "event": "task_registered",
+        "state": "created",
+        "details": {
+          "task_id": "create_shipment",
+          "task_name": "Create shipment",
+          "owner": "fulfilment_service"
+        },
+        "timestamp": "2026-11-23T12:12:11.431616+00:00"
+      },
+      {
+        "event": "task_registered",
+        "state": "created",
+        "details": {
+          "task_id": "notify_customer",
+          "task_name": "Notify customer",
+          "owner": "notification_service"
+        },
+        "timestamp": "2026-11-23T12:12:11.431621+00:00"
+      },
+      {
+        "event": "start",
+        "state": "running",
+        "details": {
+          "previous_state": "created",
+          "new_state": "running"
+        },
+        "timestamp": "2026-11-23T12:12:11.431646+00:00"
+      },
+      {
+        "event": "workflow_started",
+        "state": "running",
+        "details": {
+          "task_count": 6
+        },
+        "timestamp": "2026-11-23T12:12:11.431651+00:00"
+      },
+      {
+        "event": "task_started",
+        "state": "running",
+        "details": {
+          "task_id": "validate_order",
+          "task_name": "Validate order",
+          "owner": "validation_service",
+          "attempt": 1,
+          "step": 1
+        },
+        "timestamp": "2026-11-23T12:12:11.431668+00:00"
+      },
+      {
+        "event": "task_completed",
+        "state": "running",
+        "details": {
+          "task_id": "validate_order",
+          "outcome": "success"
+        },
+        "timestamp": "2026-11-23T12:12:11.431674+00:00"
+      },
+      {
+        "event": "task_started",
+        "state": "running",
+        "details": {
+          "task_id": "check_inventory",
+          "task_name": "Check inventory",
+          "owner": "inventory_service",
+          "attempt": 1,
+          "step": 2
+        },
+        "timestamp": "2026-11-23T12:12:11.431686+00:00"
+      },
+      {
+        "event": "task_completed",
+        "state": "running",
+        "details": {
+          "task_id": "check_inventory",
+          "outcome": "success"
+        },
+        "timestamp": "2026-11-23T12:12:11.431692+00:00"
+      },
+      {
+        "event": "task_started",
+        "state": "running",
+        "details": {
+          "task_id": "process_payment",
+          "task_name": "Process payment",
+          "owner": "payment_service",
+          "attempt": 1,
+          "step": 3
+        },
+        "timestamp": "2026-11-23T12:12:11.431696+00:00"
+      },
+      {
+        "event": "task_completed",
+        "state": "running",
+        "details": {
+          "task_id": "process_payment",
+          "outcome": "success"
+        },
+        "timestamp": "2026-11-23T12:12:11.431701+00:00"
+      },
+      {
+        "event": "task_started",
+        "state": "running",
+        "details": {
+          "task_id": "reserve_inventory",
+          "task_name": "Reserve inventory",
+          "owner": "inventory_service",
+          "attempt": 1,
+          "step": 4
+        },
+        "timestamp": "2026-11-23T12:12:11.431709+00:00"
+      },
+      {
+        "event": "task_completed",
+        "state": "running",
+        "details": {
+          "task_id": "reserve_inventory",
+          "outcome": "success"
+        },
+        "timestamp": "2026-11-23T12:12:11.431714+00:00"
+      },
+      {
+        "event": "task_started",
+        "state": "running",
+        "details": {
+          "task_id": "create_shipment",
+          "task_name": "Create shipment",
+          "owner": "fulfilment_service",
+          "attempt": 1,
+          "step": 5
+        },
+        "timestamp": "2026-11-23T12:12:11.431722+00:00"
+      },
+      {
+        "event": "task_completed",
+        "state": "running",
+        "details": {
+          "task_id": "create_shipment",
+          "outcome": "success"
+        },
+        "timestamp": "2026-11-23T12:12:11.431726+00:00"
+      },
+      {
+        "event": "task_started",
+        "state": "running",
+        "details": {
+          "task_id": "notify_customer",
+          "task_name": "Notify customer",
+          "owner": "notification_service",
+          "attempt": 1,
+          "step": 6
+        },
+        "timestamp": "2026-11-23T12:12:11.431734+00:00"
+      },
+      {
+        "event": "task_completed",
+        "state": "running",
+        "details": {
+          "task_id": "notify_customer",
+          "outcome": "success"
+        },
+        "timestamp": "2026-11-23T12:12:11.431738+00:00"
+      },
+      {
+        "event": "complete",
+        "state": "completed",
+        "details": {
+          "previous_state": "running",
+          "new_state": "completed"
+        },
+        "timestamp": "2026-11-23T12:12:11.431745+00:00"
+      },
+      {
+        "event": "workflow_completed",
+        "state": "completed",
+        "details": {
+          "completed_tasks": 6,
+          "steps_executed": 6
+        },
+        "timestamp": "2026-11-23T12:12:11.431749+00:00"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "check": "deterministic_workflow_completed",
+      "passed": true,
+      "details": "Workflow status: completed"
+    },
+    {
+      "check": "all_six_tasks_completed",
+      "passed": true,
+      "details": "Completed 6 of 6 tasks"
+    },
+    {
+      "check": "workflow_step_count_valid",
+      "passed": true,
+      "details": "Steps executed: 6"
+    },
+    {
+      "check": "workflow_dependencies_valid",
+      "passed": true,
+      "details": "All declared task dependencies match the workflow DAG"
+    },
+    {
+      "check": "business_task_outputs_valid",
+      "passed": true,
+      "details": "Validation, inventory, payment, shipment, and notification outputs verified"
+    },
+    {
+      "check": "workflow_events_recorded",
+      "passed": true,
+      "details": "Recorded 22 workflow events"
+    },
+    {
+      "check": "invalid_workflow_rejected_before_execution",
+      "passed": true,
+      "details": "Invalid dependency rejected; no handler executed"
+    }
+  ],
+  "passed_checks": 7,
+  "total_checks": 7,
+  "overall_passed": true
+}

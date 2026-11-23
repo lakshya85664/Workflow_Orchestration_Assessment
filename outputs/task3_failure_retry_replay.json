@@ -1,0 +1,80 @@
+{
+    "assessment": "Topic 19 - Workflow Orchestration",
+    "task": 3,
+    "title": "Failure, Retry, and Replay Safety",
+    "overall_status": "passed",
+    "checks_passed": 8,
+    "checks_total": 8,
+    "checks": {
+        "transient_retry_succeeded": true,
+        "timeout_retry_succeeded": true,
+        "malformed_response_rejected": true,
+        "permanent_failure_not_retried": true,
+        "successful_operation_replayed": true,
+        "duplicate_trigger_rejected": true,
+        "non_idempotent_side_effect_executed_once": true,
+        "explicit_recovery_actions_present": true
+    },
+    "scenario_results": {
+        "retry": {
+            "status": "completed",
+            "attempts": 2,
+            "next_action": "none",
+            "trace": [
+                {
+                    "attempt": 1,
+                    "outcome": "failed",
+                    "error_type": "TransientWorkflowError",
+                    "category": "transient"
+                },
+                {
+                    "attempt": 2,
+                    "outcome": "completed"
+                }
+            ]
+        },
+        "timeout": {
+            "status": "completed",
+            "attempts": 2,
+            "next_action": "none",
+            "trace": [
+                {
+                    "attempt": 1,
+                    "outcome": "failed",
+                    "error_type": "TaskTimeoutError",
+                    "category": "timeout"
+                },
+                {
+                    "attempt": 2,
+                    "outcome": "completed"
+                }
+            ]
+        },
+        "malformed_response": {
+            "status": "needs_review",
+            "error_type": "MalformedResponseError",
+            "attempts": 1,
+            "next_action": "review_handler_contract"
+        },
+        "permanent_failure": {
+            "status": "needs_review",
+            "error_type": "PermanentWorkflowError",
+            "attempts": 1,
+            "handler_calls": 1,
+            "next_action": "operator_review"
+        },
+        "replay_safety": {
+            "first_status": "completed",
+            "replay_status": "replayed",
+            "duplicate_status": "rejected",
+            "side_effect_count": 1,
+            "next_action": "return_existing_workflow_status"
+        }
+    },
+    "limitations": [
+        "Timeout behavior is simulated through a declared timeout exception.",
+        "The executor does not forcibly cancel an already-running operation.",
+        "The idempotency store is in-memory and is not durable across process restarts.",
+        "Production idempotency requires durable storage and atomic uniqueness enforcement."
+    ]
+}

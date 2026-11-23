@@ -1,0 +1,90 @@
+{
+  "topic": "Topic 19 - Workflow Orchestration Assessment",
+  "task": "Task 1 - Workflow Contract and State Model",
+  "fixture": {
+    "run_id": "4fbdec35-d3d9-4be4-b00e-8a8e6d36e9bc",
+    "business_key": "BUSINESS-001",
+    "status": "running",
+    "owner": "workflow_operator",
+    "max_steps": 10,
+    "task_count": 2,
+    "tasks": {
+      "task_1": {
+        "name": "validate_request",
+        "owner": "validation_service",
+        "state": "pending",
+        "dependencies": []
+      },
+      "task_2": {
+        "name": "process_request",
+        "owner": "processing_service",
+        "state": "pending",
+        "dependencies": [
+          "task_1"
+        ]
+      }
+    },
+    "events": [
+      {
+        "event": "workflow_created",
+        "state": "created",
+        "timestamp": "2026-11-23T12:12:04.997268+00:00"
+      },
+      {
+        "event": "task_registered",
+        "state": "created",
+        "timestamp": "2026-11-23T12:12:04.997306+00:00"
+      },
+      {
+        "event": "task_registered",
+        "state": "created",
+        "timestamp": "2026-11-23T12:12:04.997322+00:00"
+      },
+      {
+        "event": "start",
+        "state": "running",
+        "timestamp": "2026-11-23T12:12:04.997330+00:00"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "check": "fixture_created_and_started",
+      "passed": true,
+      "details": "Workflow status: running"
+    },
+    {
+      "check": "two_tasks_registered",
+      "passed": true,
+      "details": "Registered tasks: 2"
+    },
+    {
+      "check": "task_dependency_declared",
+      "passed": true,
+      "details": "task_2 depends on task_1"
+    },
+    {
+      "check": "legal_transition_passed",
+      "passed": true,
+      "details": "State after start: running"
+    },
+    {
+      "check": "illegal_transition_rejected",
+      "passed": true,
+      "details": "Illegal transition rejected without changing workflow state"
+    },
+    {
+      "check": "workflow_and_task_ownership_present",
+      "passed": true,
+      "details": "Workflow and registered tasks have owners"
+    },
+    {
+      "check": "structured_events_recorded",
+      "passed": true,
+      "details": "Structured events: 4"
+    }
+  ],
+  "passed_checks": 7,
+  "total_checks": 7,
+  "overall_passed": true
+}

@@ -1,0 +1,41 @@
+{
+  "task": "Topic 19 - Task 4",
+  "success_scenario": {
+    "status": "completed",
+    "run_id": "TASK4-RUN-SUCCESS",
+    "response": {
+      "accepted": true,
+      "external_id": "FAKE-1001"
+    },
+    "error_type": null,
+    "error_message": null
+  },
+  "failure_scenario": {
+    "status": "failed",
+    "run_id": "TASK4-RUN-FAILURE",
+    "response": null,
+    "error_type": "ConnectionError",
+    "error_message": "Simulated external dependency failure"
+  },
+  "metrics": {
+    "calls": 2,
+    "successes": 1,
+    "failures": 1,
+    "total_duration_ms": 0.009,
+    "average_duration_ms": 0.005
+  },
+  "status_checks": {
+    "success_run": "completed",
+    "failure_run": "failed"
+  },
+  "trace_event_count": 4,
+  "trace_files": [
+    "traces/task4_integration_trace.jsonl"
+  ],
+  "limitations": [
+    "The fake adapter simulates dependency behavior; it does not call a live service.",
+    "Metrics and events are held in memory until exported.",
+    "This example does not implement distributed tracing or persistent metrics storage.",
+    "Secret redaction is based on recognized dictionary key names; it is not a substitute for secure secret handling."
+  ]
+}

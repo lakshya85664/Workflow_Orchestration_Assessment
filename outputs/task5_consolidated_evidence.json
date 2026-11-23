@@ -1,0 +1,78 @@
+{
+  "assessment": "Topic 19 - Workflow Orchestration",
+  "task": "Task 5 - Operator Runbook and Evidence Report",
+  "generated_at_utc": "2026-11-23T12:15:39.276224+00:00",
+  "checks": [
+    {
+      "check": "task1_evidence_available",
+      "passed": true
+    },
+    {
+      "check": "task2_evidence_available",
+      "passed": true
+    },
+    {
+      "check": "task3_evidence_available",
+      "passed": true
+    },
+    {
+      "check": "task4_evidence_passed",
+      "passed": true
+    },
+    {
+      "check": "dependency_metrics_valid",
+      "passed": true
+    },
+    {
+      "check": "structured_trace_available",
+      "passed": true
+    },
+    {
+      "check": "measurement_report_available",
+      "passed": true
+    }
+  ],
+  "checks_passed": 7,
+  "checks_total": 7,
+  "overall_passed": true,
+  "lifecycle_scenarios": [
+    "success",
+    "failure",
+    "replay",
+    "recovery through bounded retry"
+  ],
+  "metrics": [
+    {
+      "measurement": "External dependency calls",
+      "value": 2
+    },
+    {
+      "measurement": "Successful dependency calls",
+      "value": 1
+    },
+    {
+      "measurement": "Failed dependency calls",
+      "value": 1
+    },
+    {
+      "measurement": "Total duration (ms)",
+      "value": 0.009
+    },
+    {
+      "measurement": "Average duration (ms)",
+      "value": 0.005
+    },
+    {
+      "measurement": "Structured trace events",
+      "value": 4
+    },
+    {
+      "measurement": "Automated tests",
+      "value": "40 passed in last verified run"
+    }
+  ],
+  "trace_event_count": 4,
+  "report_file": "reports/operator_runbook.md",
+  "known_limitations_documented": true,
+  "engineering_reflection_included": true
+}
